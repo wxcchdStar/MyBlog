@@ -1,12 +1,19 @@
 ---
 title: MySQL操作汇总
-date: 2017-12-21 11:27:46
-tags: MySQL
+categories:
+  - 数据库
+  - MySQL
+tags: 
+  - MySQL 
+  - 数据库
 ---
 
 ### 安装
 ```
-Linux: sudo yum install mysql
+Linux: 
+ 1. wget  https://repo.mysql.com//mysql57-community-release-el7-11.noarch.rpm
+ 2. yum localinstall mysql57-community-release-el7-11.noarch.rpm 
+ 3. yum install mysql-community-server
 Mac: brew install mysql
 ```
 ### 启动、停止、查看状态
@@ -62,6 +69,16 @@ create database [db_name];
 ### 修改用户密码
 ```
 mysqladmin -u [user] -p password
+```
+
+### 备份
+
+```
+# Backup
+docker exec CONTAINER /usr/bin/mysqldump -u root --password=root DATABASE > backup.sql
+
+# Restore
+cat backup.sql | docker exec -i CONTAINER /usr/bin/mysql -u root --password=root DATABASE
 ```
 
 ### 补充
